@@ -26,8 +26,7 @@ module.exports = {
         return ger.events(events);
       })
       .then(() => {
-        // What things might alice like?
-        return ger.recommendations_for_person('carros', 'alice', { actions: { clicks: 1 } , time_until_expiry: 2592000, filter_previous_actions: ["clicks"]})
+        return ger.recommendations_for_person('carros', person, { actions: { clicks: 1 } , time_until_expiry: 2592000, filter_previous_actions: ["clicks"]})
       })
       .then((recommendations) => {
         return recommendations.recommendations.map((o) => {
