@@ -7,6 +7,7 @@ let log = require('./modules/log.js'); //Log Library
 let cors = require('./modules/cors.js'); //CORS MODULE
 let ger_wrapper = require('./modules/ger.js'); //GER Wrapper
 let app = require('express')();
+let query = require("./modules/query.js");
 let redis = require('redis').createClient({ host: info.redis.host, port: info.redis.port });
 
 // Good Enough Recommendations
@@ -29,9 +30,16 @@ mysql_listener(app);
 app.get('/:fingerprint/:namespace', (r, rs) => {
   redis.lrange('events:carros', 0, -1, (err, res) => {
     let events = res ? res.map(JSON.parse) : {};
+
     ger_wrapper.getRecommendations(ger, events, r.namespace, r.fingerprint)
       .then((rec) => {
+        let group = [];
+        rec.forEach((object) => {
+          group.push('"' + object.value + '"');
+        });
+        group.join(',');
         rs.json(rec);
+        //rs.json(query("SELECT * FROM estoque_carros WHERE CD_NUM_Anuncio IN (" + group + ")"));
       });
   });
 });
