@@ -167,7 +167,7 @@ $(document).ready(function () {
 
     /* Ajax Related */
     $.ajax({
-        url: "http://54.165.205.87:8088/"+window.localStorage.getItem("fingerprint")+"/carros⁠⁠⁠⁠",
+        url: "http://54.165.205.87:8088/"+window.localStorage.getItem('fingerprint')+"/carros⁠⁠⁠⁠",
         contentType: 'application/json',
         dataType: "json",
         processData: false,
@@ -335,7 +335,7 @@ $(document).ready(function () {
       dataType: "json",
       processData: false,
       method: "POST",
-      data: JSON.stringify({ "value": getParameterByName("id") }),
+      data: JSON.stringify({ "value": getParameterByName("id").replace('"','') }),
       success: function (data) {
         //console.log(data);
         console.log("Inserido no localStorage");
