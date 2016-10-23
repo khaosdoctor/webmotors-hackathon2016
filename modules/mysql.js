@@ -11,7 +11,6 @@ let connection = mysql.createConnection({
 
 module.exports = (app) => {
   app.use(parser.json());
-
   app.use(cors);
 
   app.post('/mysql', (r, rs) => {
