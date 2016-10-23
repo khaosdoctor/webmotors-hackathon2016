@@ -164,6 +164,19 @@ $(document).ready(function () {
           }
       });
     });
+
+    /* Ajax Related */
+    $.ajax({
+        url: "http://54.165.205.87:8088/"+window.localStorage.getItem("fingerprint")+"/carros⁠⁠⁠⁠",
+        contentType: 'application/json',
+        dataType: "json",
+        processData: false,
+        method: "GET",
+        success: function(data){
+          console.log(data);
+        }
+    });
+    /* Ajax Related */
   }
   /* Ajax Filter */
 
@@ -275,7 +288,7 @@ $(document).ready(function () {
         dataType: "json",
         processData: false,
         method: "POST",
-        data: JSON.stringify({"query": query+" LIMIT 5"}),
+        data: JSON.stringify({"query": query+" LIMIT 10"}),
         success: function(data){
           var html = '';
           for(var i = 0; i < data.length; i++){
@@ -324,7 +337,8 @@ $(document).ready(function () {
       method: "POST",
       data: JSON.stringify({ "value": getParameterByName("id") }),
       success: function (data) {
-        console.log(data);
+        //console.log(data);
+        console.log("Inserido no localStorage");
       }
     })
   }
