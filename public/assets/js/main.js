@@ -25,7 +25,7 @@ $(document).ready(function(){
 
   /* Ajax Filter */
   if($('#brand').length > 0){
-    var brand = "<option disabled='' selected=''>MARCA</option><option value='all'>TODAS</option>",
+    var brand = "<option disabled='' selected=''>MARCA</option>",
         models = new Array();
     $.ajax({
         url: "http://54.165.205.87:8088/mysql",
@@ -53,7 +53,7 @@ $(document).ready(function(){
           method: "POST",
           data: JSON.stringify({"query":"SELECT modelo FROM catalogo_carros WHERE marca='"+$('#brand').val()+"' GROUP BY modelo"}),
           success: function(data){
-            var model = "<option disabled='' selected=''>MODELO</option><option value='all'>TODOS</option>"
+            var model = "<option disabled='' selected=''>MODELO</option>";
             for(var i = 0; i < data.length ; i++){
               var string = "<option value='"+data[i].modelo+"'>"+data[i].modelo+"</option>";
               model += string;
