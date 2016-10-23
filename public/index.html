@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8"/>
+    <title>PickMeIntel</title>
+    <!-- Styles -->
+      <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+      <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">
+      <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+      <link rel="stylesheet" href="assets/css/jquery-ui.structure.min.css">
+      <link rel="stylesheet" href="assets/css/jquery-ui.theme.min.css">
+      <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- Styles -->
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12">
+            <a href="http://www.webmotors.com.br/" target="_blank">
+              <figure>
+                <img class="img-responsive" src="assets/img/logo.png" alt="WebMotors" title="WebMotors">
+              </figure>
+            </a>
+          </div>
+      </div>
+    </header>
+    <!-- Header -->
+    <main>
+      <div class="container">
+        <!-- Search Form -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 gray">
+          <div class="form">
+            <form name="search" id="search" method="POST">
+              <div class="row">
+        				<div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+        						<input type="checkbox" checked="checked" value="N" name="TipoAnuncioN" id="TipoAnuncioN">
+        						<label for="TipoAnuncioN"></label>
+                    <span>NOVOS</span>
+                    <input type="checkbox" checked="checked" value="U" name="TipoAnuncioU" id="TipoAnuncioU">
+        						<label for="TipoAnuncioU"></label>
+                    <span>USADOS</span>
+        				</div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4 col-md-3 col-sm-12 col-xs-12">
+                  <select name="brand" id="brand">
+                    <!-- JQuery Ajax Here -->
+                  </select>
+                </div>
+                <div class="col-lg-4 col-md-3 col-sm-12 col-xs-12">
+                  <select name="model" id="model">
+                    <option disabled="" selected="">MODELO</option>
+                    <option value="all">TODOS</option>
+                    <!-- JQuery Ajax Here -->
+                  </select>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+                  <select name="year1" id="year1">
+                    <option disabled="" selected="">ANO DE:</option>
+                    <!-- JQuery Ajax Here -->
+                  </select>
+                  <div id="loader1">
+                    <figure>
+                      <p>ANO DE: </p>
+                      <img src="assets/img/loader.gif" class="img-responsive" title="loader" alt="loader">
+                    </figure>
+                  </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+                  <select name="year2" id="year2">
+                    <option disabled="" selected="">ANO ATÉ:</option>
+                    <!-- JQuery Ajax Here -->
+                  </select>
+                  <div id="loader2">
+                    <figure>
+                      <p>ANO ATÉ: </p>
+                      <img src="assets/img/loader.gif" class="img-responsive" title="loader" alt="loader">
+                    </figure>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
+                  <input type="text" name="keywords" placeholder="PALAVRAS-CHAVE">
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+                  <input class="money" type="text" name="pricemin" placeholder="PREÇO MÍN">
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+                  <input class="money" type="text" name="pricemax" placeholder="PREÇO MÁX">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 region">
+                  <select name="state">
+                    <option disabled="" selected="">REGIÃO: </option>
+                    <option value="all">TODO O BRASIL</option>
+                    <option value="AC">ACRE</option>
+                    <option value="AL">ALAGOAS</option>
+                    <option value="AP">AMAPÁ</option>
+                    <option value="AM">AMAZONAS</option>
+                    <option value="BA">BAHIA</option>
+                    <option value="CE">CEARÁ</option>
+                    <option value="DF">DISTRITO FEDERAL</option>
+                    <option value="ES">ESPÍRITO SANTO</option>
+                    <option value="GO">GOIÁS</option>
+                    <option value="MA">MARANHÃO</option>
+                    <option value="MT">MATO GROSSO</option>
+                    <option value="MS">MATO GROSSO DO SUL</option>
+                    <option value="MG">MINAS GERAIS</option>
+                    <option value="PA">PARÁ</option>
+                    <option value="PB">PARAÍBA</option>
+                    <option value="PR">PARANÁ</option>
+                    <option value="PE">PERNAMBUCO</option>
+                    <option value="PI">PIAUÍ</option>
+                    <option value="RJ">RIO DE JANEIRO</option>
+                    <option value="RN">RIO GRANDE DO NORTE</option>
+                    <option value="RS">RIO GRANDE DO SUL</option>
+                    <option value="RO">RONDÔNIA</option>
+                    <option value="RR">RORAIMA</option>
+                    <option value="SC">SANTA CATARINA</option>
+                    <option value="SP">SÃO PAULO</option>
+                    <option value="SE">SERGIPE</option>
+                    <option value="TO">TOCANTINS</option>
+                  </select>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <input type="submit" value="Ver Ofertas">
+                </div>
+              </div>
+      			</form>
+          </div>
+        </div>
+        <!-- Search Form -->
+        <!-- Result -->
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+            <div class="result">
+              <h2>Resultado</h2>
+              <div class="itens">
+                <!-- Ajax Response Here -->
+              </div>
+              <!-- TODO implements pagination -->
+              <!--<div class="pagination">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <ul>
+                        <li>
+                          1
+                        </li>
+                        <a href="#">
+                          <li>
+                            2
+                          </li>
+                        </a>
+                        <a href="#">
+                          <li>
+                            3
+                          </li>
+                        </a>
+                        <a href="#">
+                          <li>
+                            4
+                          </li>
+                        </a>
+                      </ul>
+                  </div>
+                </div>-->
+                <!-- TODO implements pagination -->
+              </div>
+              <!--Ajax Search -->
+            </div>
+          </div>
+        </div>
+        <!-- Result -->
+      </div>
+    </main>
+    <footer>
+      <!-- Footer -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <p>Desenvolvido pelo time <span>PickMeIntel</span></p>
+          </div>
+        </div>
+      </div>
+      <!-- Footer -->
+      <!-- Scripts JavaScript -->
+        <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+        <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.mask.min.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.maskMoney.min.js"></script>
+        <script type="text/javascript" src="assets/js/main.js"></script>
+      <!-- Scripts JavaScript -->
+    </footer>
+  </body>
+</html>
