@@ -43,12 +43,13 @@ app.get('/:fingerprint/:namespace', (r, rs) => {
 app.post("/:fingerprint", (r, rs) => {
   app.use(parser.json());
   app.use(cors);
-  let result = ger_wrapper.addEvent(redis, "carros", r.fingerprint, r.value)
+  let result = ger_wrapper.addEvent(redis, "carros", r.fingerprint, r.body.value);
+  console.log(result);
   if (result === true) {
-    rs.status(201).json({ value: r.value });
+    rs.status(201).json({fingerprint: r.fingerprint, value: r.body.value });
   }
   else {
-    rs.status(403).json(result);
+    rs.status(400).json(result);
   }
 
 });

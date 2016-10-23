@@ -11,7 +11,7 @@ module.exports = {
       thing: thing,
       expires_at: moment(d).add(1, 'months').format('YYYY-MM-DD')
     }];
-    redis.rpush("events:" + namespace, event, (err, res) => {
+    return redis.rpush("events:" + namespace, JSON.stringify(event), (err, res) => {
       if (err) {
         console.error(err);
         return err;
@@ -25,10 +25,10 @@ module.exports = {
         return ger.events(events);
       })
       .then(() => {
-        return ger.recommendations_for_person(namespace, person, { actions: { 'likes': 1 }, time_until_expiry: 2592000, filter_previous_actions: ["likes"]});
+        return ger.recommendations_for_person(namespace, person, { actions: { 'clicks': 1 }, time_until_expiry: 2592000, filter_previous_actions: ["clicks"]});
       })
       .then((recommend) => {
-        return (recommend)
+        return (recommend);
        });
   }
 };
