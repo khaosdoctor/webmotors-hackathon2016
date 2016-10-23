@@ -255,6 +255,11 @@
     color: #fff;
     border: 2px solid white;
   }
+  main .related h2{
+    text-align: center;
+    color: #cc2929;
+    font-weight: 700;
+  }
   main .related a{
     color: black;
   }
