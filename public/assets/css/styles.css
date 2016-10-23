@@ -299,6 +299,9 @@
     height: 52px;
     overflow: hidden;
   }
+  main .related h4{
+    height: 55px;
+  }
   main .related p{
     text-align: center;
     color: #cc2929;
