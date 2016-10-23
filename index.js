@@ -34,12 +34,12 @@ app.get('/:fingerprint/:namespace', (r, rs) => {
 
     ger_wrapper.getRecommendations(ger, events, r.namespace, r.fingerprint)
       .then((rec) => {
-        let group = [];
+        let group = ["1"];
         rec.forEach((object) => {
           group.push('"' + object.value + '"');
         });
         group.join(',');
-        query("SELECT * FROM estoque_carros WHERE CD_NUM_Anuncio IN (" + group + ")", (response) => {
+        query("SELECT CD_NUM_Anuncio, NM_VCH_Marca, NM_VCH_Modelo, NM_VCH_Versao, ST_CHR_Anuncio, VL_NUM_Venda FROM estoque_carros WHERE CD_NUM_Anuncio IN (" + group + ")", (response) => {
           rs.json(response);
         });
       });
