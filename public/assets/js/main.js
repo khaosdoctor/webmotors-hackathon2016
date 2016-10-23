@@ -70,6 +70,49 @@ $(document).ready(function () {
   });
   /* Masks */
 
+  /* Ajax Related */
+  $('#container-related').show();
+  $('#relateds').html('<img src="assets/img/loader.gif" class="img-responsive" title="loader" alt="loader" style="margin: 0 auto;">');
+  $.ajax({
+      url: "http://54.165.205.87:8088/"+window.localStorage.getItem('fingerprint')+"/carros⁠⁠⁠⁠",
+      contentType: 'application/json',
+      dataType: "json",
+      processData: false,
+      method: "GET",
+      success: function(data){
+        var html = "";
+        for(var i = 0; i < data.length; i++){
+          if(i == 4){
+            break;
+          }
+          if(data.length == 1){
+            var item = '<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 col-centered"><div class="related-item" id="related-item'+i+'"><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><figure><img class="img-responsive" src="assets/img/img.jpg" alt="Car" title="Car"></figure></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h3>'+data[i].NM_VCH_Marca+' - '+data[i].NM_VCH_Modelo+'</h3></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h4>'+data[i].NM_VCH_Versao+'</h4></a><p>R$ '+data[i].VL_NUM_Venda+'</p></div></div>';
+          }
+          else if(data.length == 2 && i == 0){
+            var item = '<div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3 col-sm-6 col-sm-offset-0 col-xs-12"><div class="related-item" id="related-item'+i+'"><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><figure><img class="img-responsive" src="assets/img/img.jpg" alt="Car" title="Car"></figure></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h3>'+data[i].NM_VCH_Marca+' - '+data[i].NM_VCH_Modelo+'</h3></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h4>'+data[i].NM_VCH_Versao+'</h4></a><p>R$ '+data[i].VL_NUM_Venda+'</p></div></div>';
+          }
+          else if(data.length == 2 && i > 0){
+            var item = '<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"><div class="related-item" id="related-item'+i+'"><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><figure><img class="img-responsive" src="assets/img/img.jpg" alt="Car" title="Car"></figure></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h3>'+data[i].NM_VCH_Marca+' - '+data[i].NM_VCH_Modelo+'</h3></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h4>'+data[i].NM_VCH_Versao+'</h4></a><p>R$ '+data[i].VL_NUM_Venda+'</p></div></div>';
+          }
+          else if(data.length == 3){
+            var item = '<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><div class="related-item" id="related-item'+i+'"><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><figure><img class="img-responsive" src="assets/img/img.jpg" alt="Car" title="Car"></figure></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h3>'+data[i].NM_VCH_Marca+' - '+data[i].NM_VCH_Modelo+'</h3></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h4>'+data[i].NM_VCH_Versao+'</h4></a><p>R$ '+data[i].VL_NUM_Venda+'</p></div></div>';
+          }
+          else if(data.length >= 4){
+            var item = '<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"><div class="related-item" id="related-item'+i+'"><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><figure><img class="img-responsive" src="assets/img/img.jpg" alt="Car" title="Car"></figure></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h3>'+data[i].NM_VCH_Marca+' - '+data[i].NM_VCH_Modelo+'</h3></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h4>'+data[i].NM_VCH_Versao+'</h4></a><p>R$ '+data[i].VL_NUM_Venda+'</p></div></div>';
+          }
+
+          html += item;
+        }
+        if(data.length == 0 || data.length == null){
+          $('#relateds').html('<p>Não há itens relacionados</p>');
+        }
+        if(html !== ""){
+          $('#relateds').html(html);
+        }
+      }
+  });
+  /* Ajax Related */
+
   /* Ajax Filter */
   if($('#brand').length > 0){
     var brand = "<option disabled='' selected=''>MARCA</option>",
@@ -165,45 +208,6 @@ $(document).ready(function () {
       });
     });
 
-    /* Ajax Related */
-    $.ajax({
-        url: "http://54.165.205.87:8088/"+window.localStorage.getItem('fingerprint')+"/carros⁠⁠⁠⁠",
-        contentType: 'application/json',
-        dataType: "json",
-        processData: false,
-        method: "GET",
-        success: function(data){
-          var html = "";
-          console.log(data);
-          for(var i = 0; i < data.length; i++){
-            if(i == 4){
-              break;
-            }
-            if(data.length == 1){
-              var item = '<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 col-centered"><div class="related-item" id="related-item'+i+'"><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><figure><img class="img-responsive" src="assets/img/img.jpg" alt="Car" title="Car"></figure></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h3>'+data[i].NM_VCH_Marca+' - '+data[i].NM_VCH_Modelo+'</h3></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h4>'+data[i].NM_VCH_Versao+'</h4></a><p>R$ '+data[i].VL_NUM_Venda+'</p></div></div>';
-            }
-            else if(data.length == 2 && i == 0){
-              var item = '<div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3 col-sm-6 col-sm-offset-0 col-xs-12"><div class="related-item" id="related-item'+i+'"><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><figure><img class="img-responsive" src="assets/img/img.jpg" alt="Car" title="Car"></figure></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h3>'+data[i].NM_VCH_Marca+' - '+data[i].NM_VCH_Modelo+'</h3></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h4>'+data[i].NM_VCH_Versao+'</h4></a><p>R$ '+data[i].VL_NUM_Venda+'</p></div></div>';
-            }
-            else if(data.length == 2 && i > 0){
-              var item = '<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"><div class="related-item" id="related-item'+i+'"><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><figure><img class="img-responsive" src="assets/img/img.jpg" alt="Car" title="Car"></figure></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h3>'+data[i].NM_VCH_Marca+' - '+data[i].NM_VCH_Modelo+'</h3></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h4>'+data[i].NM_VCH_Versao+'</h4></a><p>R$ '+data[i].VL_NUM_Venda+'</p></div></div>';
-            }
-            else if(data.length == 3){
-              var item = '<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><div class="related-item" id="related-item'+i+'"><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><figure><img class="img-responsive" src="assets/img/img.jpg" alt="Car" title="Car"></figure></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h3>'+data[i].NM_VCH_Marca+' - '+data[i].NM_VCH_Modelo+'</h3></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h4>'+data[i].NM_VCH_Versao+'</h4></a><p>R$ '+data[i].VL_NUM_Venda+'</p></div></div>';
-            }
-            else if(data.length >= 4){
-              var item = '<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"><div class="related-item" id="related-item'+i+'"><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><figure><img class="img-responsive" src="assets/img/img.jpg" alt="Car" title="Car"></figure></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h3>'+data[i].NM_VCH_Marca+' - '+data[i].NM_VCH_Modelo+'</h3></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h4>'+data[i].NM_VCH_Versao+'</h4></a><p>R$ '+data[i].VL_NUM_Venda+'</p></div></div>';
-            }
-
-            html += item;    
-          }
-          $('#container-related').show();
-          if(html !== ""){
-            $('#relateds').html(html);
-          }
-        }
-    });
-    /* Ajax Related */
   }
   /* Ajax Filter */
 

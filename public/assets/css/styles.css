@@ -352,9 +352,6 @@
     color: #cc2929;
     font-size: 30px;
   }
-  main .back button:hover:before{
-    left: 15px;
-  }
   main  .back button:focus{
     outline: none;
   }

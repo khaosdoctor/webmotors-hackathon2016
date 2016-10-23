@@ -1,0 +1,33 @@
+@media (max-width: 1199px){
+
+}
+
+@media (max-width: 991px){
+  main .result .item {
+    height: auto;
+  }
+  main .result .item figure{
+    height: auto;
+  }
+  main .result .item figure img {
+    margin: 0 auto;
+    height: auto;
+  }
+  main .result .item .text {
+    text-align: center;
+  }
+}
+
+@media (max-width: 767px){
+  main form input[type="checkbox"] + label{
+    margin: 0;
+  }
+  main form input, main form select {
+    width: 100%;
+    margin: 5px auto;
+  }
+}
+
+@media (max-width: 480px){
+
+}
