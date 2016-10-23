@@ -330,12 +330,12 @@ $(document).ready(function () {
     });
     //Insere na hora que clica no anuncio
     $.ajax({
-      url: "http://54.165.205.87:8088/" + window.localStorage.getItem("fingerprint") + "",
+      url: "http://54.165.205.87:8088/" + window.localStorage.getItem('fingerprint'),
       contentType: 'application/json',
       dataType: "json",
       processData: false,
       method: "POST",
-      data: JSON.stringify({ "value": getParameterByName("id").replace('"','') }),
+      data: JSON.stringify({ "value": getParameterByName("id").replace('"','').replace('"','')}),
       success: function (data) {
         //console.log(data);
         console.log("Inserido no localStorage");
