@@ -50,7 +50,16 @@ function getAvg(){
 }
 /* Functions */
 
-$(document).ready(function(){
+$(document).ready(function () {
+  
+  var fingerprint = window.localStorage.getItem("fingerprint");
+  if (!fingerprint) {
+    new Fingerprint2().get(function (result, components) {
+      window.localStorage.setItem("fingerprint", result);
+      fingerprint = result;
+    });
+  } 
+
   /* Masks */
   $('.money').maskMoney({
     prefix: 'R$ ',
@@ -306,6 +315,18 @@ $(document).ready(function(){
           $('#content').fadeIn();
         }
     });
+    //Insere na hora que clica no anuncio
+    $.ajax({
+      url: "http://54.165.205.87:8088/" + window.localStorage.getItem("fingerprint") + "",
+      contentType: 'application/json',
+      dataType: "json",
+      processData: false,
+      method: "POST",
+      data: JSON.stringify({ "value": getParameterByName("id") }),
+      success: function (data) {
+        console.log(data);
+      }
+    })
   }
   /* Ajax Single */
 });
