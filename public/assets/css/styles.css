@@ -36,6 +36,9 @@
   main #loader-page{
     display: block;
   }
+  main #container-relateds{
+    display: none;
+  }
   main #loader-page figure{
     background: white;
     padding: 20px;

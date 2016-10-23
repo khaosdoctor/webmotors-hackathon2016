@@ -166,8 +166,6 @@ $(document).ready(function () {
     });
 
     /* Ajax Related */
-    $('main .related').show();
-    $('#relateds').html('<img src="assets/img/loader.gif" class="img-responsive" title="loader" alt="loader" style="margin: 0 auto;">');
     $.ajax({
         url: "http://54.165.205.87:8088/"+window.localStorage.getItem('fingerprint')+"/carros⁠⁠⁠⁠",
         contentType: 'application/json',
@@ -200,6 +198,7 @@ $(document).ready(function () {
             html += item;
           }
           if(html !== ""){
+            $('#container-relateds').show();
             $('#relateds').html(html);
           }
         }
