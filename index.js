@@ -28,14 +28,11 @@ mysql_listener(app);
 // Gets recommendations
 app.get('/:fingerprint/:namespace', (r, rs) => {
   redis.lrange('events:carros', 0, -1, (err, res) => {
-
     let events = res ? res.map(JSON.parse) : {};
-    
     ger_wrapper.getRecommendations(ger, events, r.namespace, r.fingerprint)
-      .then((recommendation) => {
-        rs.json(recommendation);
+      .then((rec) => {
+        rs.json(rec);
       });
-    
   });
 });
 
@@ -44,7 +41,6 @@ app.post("/:fingerprint", (r, rs) => {
   app.use(parser.json());
   app.use(cors);
   let result = ger_wrapper.addEvent(redis, "carros", r.fingerprint, r.body.value);
-  console.log(result);
   if (result === true) {
     rs.status(201).json({fingerprint: r.fingerprint, value: r.body.value });
   }
