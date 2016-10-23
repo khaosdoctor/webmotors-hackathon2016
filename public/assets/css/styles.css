@@ -36,9 +36,11 @@
   main #loader-page{
     display: block;
   }
-  main #container-relateds{
+
+  main #container-related{
     display: none;
   }
+
   main #loader-page figure{
     background: white;
     padding: 20px;
@@ -275,9 +277,6 @@
     background-color: #cc2929;
     color: #fff;
     border: 2px solid white;
-  }
-  main .related{
-    display: none;
   }
   main .related h2{
     text-align: center;

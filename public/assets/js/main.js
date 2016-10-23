@@ -195,10 +195,10 @@ $(document).ready(function () {
               var item = '<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"><div class="related-item" id="related-item'+i+'"><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><figure><img class="img-responsive" src="assets/img/img.jpg" alt="Car" title="Car"></figure></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h3>'+data[i].NM_VCH_Marca+' - '+data[i].NM_VCH_Modelo+'</h3></a><a href="single.html?id='+data[i].CD_NUM_Anuncio+'"><h4>'+data[i].NM_VCH_Versao+'</h4></a><p>R$ '+data[i].VL_NUM_Venda+'</p></div></div>';
             }
 
-            html += item;
+            html += item;    
           }
+          $('#container-related').show();
           if(html !== ""){
-            $('#container-relateds').show();
             $('#relateds').html(html);
           }
         }
