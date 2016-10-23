@@ -13,6 +13,11 @@
   .no-padding{
     padding: 0;
   }
+
+  .col-centered{
+    float: none;
+    margin: 0 auto;
+  }
 /* General Classes */
 
 /* Header */
@@ -289,9 +294,13 @@
   main .related h3, main .related h4{
     text-align: center;
     transition: all 0.3s ease;
+    height: 52px;
+    overflow: hidden;
   }
   main .related p{
     text-align: center;
+    color: #cc2929;
+    font-size: 20px;
   }
   main .related a:hover h3, main .related a:hover h4{
     color: #cc2929;
