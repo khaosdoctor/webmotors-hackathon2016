@@ -255,6 +255,26 @@
     color: #fff;
     border: 2px solid white;
   }
+  main .related a{
+    color: black;
+  }
+  main .related .related-item{
+    margin: 15px auto;
+    border: 2px solid gray;
+  }
+  main .related a:hover{
+    text-decoration: none;
+  }
+  main .related h3, main .related h4{
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  main .related p{
+    text-align: center;
+  }
+  main .related a:hover h3, main .related a:hover h4{
+    color: #cc2929;
+  }
 /* Main Index */
 
 /* Main Single */
