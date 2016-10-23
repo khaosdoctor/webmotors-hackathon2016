@@ -10,6 +10,44 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
+
+function getAvg(){
+  var models = "",
+      ids = new Array();
+  for(var i = 0; i < 5; i++){
+    var model = $("#item"+i).attr('model');
+    if(i == 0){
+      models += "'"+model+"'";
+    }
+    else{
+        models += ", '"+model+"'";
+    }
+    ids[i] = model;
+  }
+  $.ajax({
+    url: "http://54.165.205.87:8088/mysql",
+    contentType: 'application/json',
+    dataType: "json",
+    processData: false,
+    method: "POST",
+    data: JSON.stringify({"query": "SELECT NM_VCH_Modelo as modelo, ROUND(AVG(VL_NUM_Venda),2) as media from estoque_carros WHERE NM_VCH_Modelo IN ("+models+") GROUP BY modelo"}),
+    success: function(data){
+      for(var i = 0; i < data.length; i++){
+        var count = 0,
+            j = 0;
+        while(count < 1){
+          if(ids[j] === data[i].modelo){
+            //$("#price"+i).html(data[i].media);
+            count++;
+          }
+          else{
+            j++;
+          }
+        }
+      }
+    }
+  });
+}
 /* Functions */
 
 $(document).ready(function(){
@@ -232,14 +270,19 @@ $(document).ready(function(){
         success: function(data){
           var html = '';
           for(var i = 0; i < data.length; i++){
-            var item = '<div class="item" id="item'+i+'"><div class="row"><div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><a href="single.html?id='+data[i].cod+'"><figure><img class="img-responsive" src="assets/img/img.jpg" alt="Cars" title="Cars"></figure></a></div><div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><div class="text"><a href=single.html?id="'+data[i].cod+'"><h3>'+data[i].marca+' - '+data[i].modelo+'</h3></a><a href=single.html?id="'+data[i].cod+'"><h4>'+data[i].versao+'</h4></a><p>R$ '+data[i].valor+'</p><hr><div class="row"><div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><span>'+data[i].anoFab+'/'+data[i].anoModel+'</span></div><div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><span>'+data[i].km+' KM</span></div></div><hr><h5>'+data[i].state+'</h5></div></div></div></div>';
+            var item = '<div class="item" id="item'+i+'" bd="'+data[i].cod+'" model="'+data[i].modelo+'"><div class="row"><div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><a href="single.html?id='+data[i].cod+'"><figure><img class="img-responsive" src="assets/img/img.jpg" alt="Cars" title="Cars"></figure></a></div><div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><div class="text"><a href=single.html?id="'+data[i].cod+'"><h3>'+data[i].marca+' - '+data[i].modelo+'</h3></a><a href=single.html?id="'+data[i].cod+'"><h4>'+data[i].versao+'</h4></a><p>R$ '+data[i].valor+'</p><hr><div class="row"><div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><span>'+data[i].anoFab+'/'+data[i].anoModel+'</span></div><div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><span>'+data[i].km+' KM</span></div></div><hr><h5>'+data[i].state+'</h5></div></div></div></div>';
             html += item;
           }
           $('main .result h2').show();
           $('.itens').html(html);
+          for(var i = 0; i < data.length; i++) {
+              $("main .result #item"+i+" figure").append("<div class='price' id='price"+i+"'></div>");
+          }
         }
+    }).done(function(){
+      getAvg();
     });
-      /* Ajax */
+    /* Ajax */
   });
   /* Ajax Submit Form */
 
