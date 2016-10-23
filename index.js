@@ -4,9 +4,12 @@ let params = require('./routes/params.js'); // Param treatment
 let mysql_listener = require('./modules/mysql.js'); // MySQL Queries
 let log = require('./modules/log.js'); //Log Library
 let cors = require('./modules/cors.js'); //CORS MODULE
-let ger = require('./modules/ger.js');
+let ger_wrapper = require('./modules/ger.js');
 let app = require('express')();
-let redis = require('redis').createClient({host: info.redis.host, port: info.redis.port});
+let redis = require('redis').createClient({ host: info.redis.host, port: info.redis.port });
+let g = require('ger');
+let esm = new g.MemESM();
+let ger = new g.GER(esm);
 
 // Treating methods which are not allowed to happen
 exclude(app);
@@ -21,24 +24,19 @@ app.use(cors); //Removes CORS
 
 // List of allowed methods
 app.get('/:fingerprint/:namespace', (r, rs) => {
-  rs.json(ger.getRecomendations(r.namespace, r.fingerprint));
+  redis.lrange('events:carros', 0, -1, (err, res) => {
+    let events = res ? res.map(JSON.parse) : {};
+    ger_wrapper.getRecommendations(ger, events, r.namespace, r.fingerprint)
+      .then((r) => {
+        console.log(r);
+      });
+  })
 });
 
 // Redis is connected, we can start listening on ports
 redis.on('connect', () => {
   log.info("Redis connected");
-  ger.init(redis);
   app.listen(8088, function () { log.info('Listening on port 8088'); });
-  let obj = {
-    namespace: 'carros',
-    person: 'bob',
-    action: 'likes',
-    thing: 'xmen',
-    expires_at: '2020-06-06'
-  };
-  for (var i = 0; i < 100; i++) {
-    redis.rpush("events:carros", JSON.stringify(obj), (e, r) => {});
-  }
 });
 
 // Redis Error
