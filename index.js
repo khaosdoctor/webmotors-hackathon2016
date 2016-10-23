@@ -12,8 +12,6 @@ let redis = require('redis').createClient({ host: info.redis.host, port: info.re
 
 // Good Enough Recommendations
 let g = require('ger');
-let esm = new g.MemESM();
-let ger = new g.GER(esm);
 
 // Treating methods which are not allowed to happen
 exclude(app);
@@ -28,6 +26,9 @@ mysql_listener(app);
 
 // Gets recommendations
 app.get('/:fingerprint/:namespace', (r, rs) => {
+  let esm = new g.MemESM();
+  let ger = new g.GER(esm);
+
   redis.lrange('events:carros', 0, -1, (err, res) => {
     let events = res ? res.map(JSON.parse) : {};
 
@@ -38,8 +39,9 @@ app.get('/:fingerprint/:namespace', (r, rs) => {
           group.push('"' + object.value + '"');
         });
         group.join(',');
-        rs.json(rec);
-        //rs.json(query("SELECT * FROM estoque_carros WHERE CD_NUM_Anuncio IN (" + group + ")"));
+        query("SELECT * FROM estoque_carros WHERE CD_NUM_Anuncio IN (" + group + ")", (response) => {
+          rs.json(response);
+        });
       });
   });
 });

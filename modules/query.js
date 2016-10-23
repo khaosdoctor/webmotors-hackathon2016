@@ -7,7 +7,7 @@ let connection = mysql.createConnection({
   database : 'wmhackathon'
 });
 
-module.exports = (query) => {
+module.exports = (query, cb) => {
   query = (!query) ? false : query;
 
   if (query) {
@@ -16,8 +16,7 @@ module.exports = (query) => {
       if (err) {
         return false;
       }
-      console.log('g',rows);
-      return rows;
+      cb(rows);
     })
   }
 };
