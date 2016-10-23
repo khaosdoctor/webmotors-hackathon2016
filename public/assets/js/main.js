@@ -280,7 +280,7 @@ $(document).ready(function(){
           }
         }
     }).done(function(){
-      getAvg();
+      //getAvg();
     });
     /* Ajax */
   });
