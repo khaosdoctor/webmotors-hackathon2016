@@ -51,14 +51,14 @@ function getAvg(){
 /* Functions */
 
 $(document).ready(function () {
-  
+
   var fingerprint = window.localStorage.getItem("fingerprint");
   if (!fingerprint) {
     new Fingerprint2().get(function (result, components) {
       window.localStorage.setItem("fingerprint", result);
       fingerprint = result;
     });
-  } 
+  }
 
   /* Masks */
   $('.money').maskMoney({
@@ -284,9 +284,9 @@ $(document).ready(function () {
           }
           $('main .result h2').show();
           $('.itens').html(html);
-          for(var i = 0; i < data.length; i++) {
+          /*for(var i = 0; i < data.length; i++) {
               $("main .result #item"+i+" figure").append("<div class='price' id='price"+i+"'></div>");
-          }
+          }*/
         }
     }).done(function(){
       //getAvg();
