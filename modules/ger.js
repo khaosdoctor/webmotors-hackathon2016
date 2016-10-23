@@ -30,7 +30,9 @@ module.exports = {
         return ger.recommendations_for_person('carros', 'alice', { actions: { clicks: 1 } , time_until_expiry: 2592000, filter_previous_actions: ["clicks"]})
       })
       .then((recommendations) => {
-          return recommendations.recommendations;
+        return recommendations.recommendations.map((o) => {
+          return { value: o.thing };
+         });
       });
   }
 };
