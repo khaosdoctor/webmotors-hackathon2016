@@ -1,7 +1,7 @@
 let mysql = require('mysql');
 let log = require('./log.js');
 let connection = mysql.createConnection({
-  host     : 'wm-hackathon-3.cyplqvjvmg0f.us-east-1.rds.amazonaws.com',
+  host     : 'mysqlhost',
   user     : 'hackathon',
   password : 'hackathon',
   database : 'wmhackathon'
